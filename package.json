@@ -1,8 +1,9 @@
 {
-  "name": "atom-voice",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@google/genai": "^1.0.0"
-  }
+"name": "atom-voice",
+"version": "1.0.0",
+"private": true,
+"type": "module",
+"dependencies": {
+"@google/genai": "^1.0.0"
+}
 }
