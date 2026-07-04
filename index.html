@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#060606" />
+    <title>Atom Voice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="topbar">
+        <span class="brand">atom</span>
+        <span class="status" id="status">offline</span>
+      </div>
+
+      <div class="stage">
+        <h1 class="title">
+          <span class="atom">ATOM</span>
+          <span class="voice">voice</span>
+        </h1>
+        <div class="orb-wrap">
+          <span class="ring ring-1"></span>
+          <span class="ring ring-2"></span>
+          <span class="ring ring-3"></span>
+          <button class="orb" id="orb" aria-label="Start call">
+            <span class="orb-inner"></span>
+          </button>
+        </div>
+        <p class="hint" id="hint">Tap to Talk</p>
+        <p class="error-banner" id="errorBanner"></p>
+      </div>
+
+      <div class="controls" id="controls">
+        <button class="ctrl-btn" id="muteBtn">
+          <svg
+            class="icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+            <line x1="12" y1="19" x2="12" y2="23" />
+            <line x1="8" y1="23" x2="16" y2="23" />
+          </svg>
+          <span>Mute</span>
+        </button>
+        <button class="ctrl-btn end-btn" id="endBtn">
+          <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="4" y="4" width="16" height="16" rx="3" />
+          </svg>
+          <span>End call</span>
+        </button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
