@@ -450,6 +450,7 @@ body {
   font-size: 14px;
   color: var(--muted);
   text-align: center;
+  display: none;
   transition: opacity 0.2s ease;
 }
 
