@@ -569,3 +569,11 @@ body {
     padding-right: 16px;
   }
 }
+@media (max-width: 480px) {
+  .title .atom {
+    font-size: clamp(64px, 18vw, 100px);
+  }
+  .title .voice {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+}
