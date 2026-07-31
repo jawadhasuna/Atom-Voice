@@ -76,7 +76,7 @@ body {
   gap: 6px;
   padding: 5px 12px;
   border-radius: 999px;
-  background: var(--pill-bg);
+  background: transparent;
   color: var(--muted);
   font-size: 12px;
   transition: background 0.3s ease, color 0.3s ease;
