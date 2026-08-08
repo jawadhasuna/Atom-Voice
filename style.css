@@ -140,13 +140,10 @@ body {
   font-weight: 400;
   font-size: clamp(48px, 12vw, 88px);
   letter-spacing: 4px;
-  color: #ffffff;
-  text-shadow: 2px 4px 14px rgba(255, 255, 255, 0.25);
-}
-.title .a {
   color: #e50914;
   text-shadow: 2px 4px 14px rgba(229, 9, 20, 0.35);
 }
+
 .title .voice {
   font-family: "Bebas Neue", "Inter", sans-serif;
   font-weight: 400;
