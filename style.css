@@ -145,7 +145,10 @@ body {
 }
 .title .a {
   color: #e50914;
-  text-shadow: 2px 4px 14px rgba(229, 9, 20, 0.35);
+  font-size: 1.12em;
+  line-height: 0;
+  text-shadow: 0 0 18px rgba(229, 9, 20, 0.65), 2px 4px 16px rgba(229, 9, 20, 0.45);
+
 }
 .title .voice {
   font-family: "Bebas Neue", "Inter", sans-serif;
