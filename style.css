@@ -135,24 +135,23 @@ body {
   margin-top: 20px;   /* ← add this line */
 }
 
-.title .atom {
-  font-family: "Bebas Neue", "Inter", sans-serif;
-  font-weight: 400;
-  font-size: clamp(48px, 12vw, 88px);
-  letter-spacing: 4px;
-  color: #ffffff;
-  text-shadow: 2px 4px 14px rgba(255, 255, 255, 0.25);
+/* The wordmark is now artwork rather than type. Width drives the size; the
+   viewBox keeps the proportions, so no height is needed. */
+.vmark {
+  display: block;
+  width: clamp(190px, 46vw, 300px);
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
 }
 
-.title .voice {
-  font-family: "Bebas Neue", "Inter", sans-serif;
-  font-weight: 400;
-  font-size: clamp(16px, 4vw, 26px);
-  letter-spacing: 6px;
-  text-transform: lowercase;
-  color: #e50914;
-  opacity: 0.95;
-  text-shadow: 1px 2px 8px rgba(229, 9, 20, 0.4);
+/* Keeps the name in the accessibility tree and in search results, since the
+   mark itself is aria-hidden. */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
 }
 
 .orb-wrap {
@@ -570,20 +569,6 @@ body {
   }
 }
 @media (max-width: 480px) {
-  .title .atom {
-    font-size: clamp(64px, 18vw, 100px);
-  }
-  .title .voice {
-    font-size: clamp(20px, 6vw, 30px);
-  }
-}
-@media (max-width: 480px) {
-  .title .atom {
-    font-size: clamp(64px, 18vw, 100px);
-  }
-  .title .voice {
-    font-size: clamp(20px, 6vw, 30px);
-  }
   .orb-wrap {
     --size: clamp(160px, 42vw, 220px);
     width: clamp(180px, 46vw, 240px);

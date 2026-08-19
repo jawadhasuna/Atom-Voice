@@ -379,7 +379,7 @@ function connectWebSocket() {
       setupReady = true;
       setStatus("live", true);
       setOrbState("listening");
-      hint.textContent = "Atom Listens";
+      hint.textContent = "Atom Voice Listens";
       return;
     }
 

@@ -10,7 +10,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Atom" />
+    <meta name="apple-mobile-web-app-title" content="Atom Voice" />
     <title>Atom Voice</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,14 +24,31 @@
   <body>
     <div class="app">
       <div class="topbar">
-        <span class="brand">atom</span>
+        <span class="brand">atom voice</span>
         <span class="status" id="status">offline</span>
       </div>
 
       <div class="stage">
-       <h1 class="title">
-<span class="atom">ATOM</span>
-</h1>
+        <h1 class="title">
+          <span class="visually-hidden">Atom Voice</span>
+          <svg class="vmark" viewBox="0 0 240 200" role="img" aria-hidden="true" focusable="false">
+            <!-- V: black keyline, red fill, white inline -->
+            <path d="M18 14 H74 L120 132 L166 14 H222 L146 186 H94 Z"
+                  fill="#0B0B0B" stroke="#0B0B0B" stroke-width="16" stroke-linejoin="round"/>
+            <path d="M18 14 H74 L120 132 L166 14 H222 L146 186 H94 Z" fill="#E50914"/>
+            <path d="M18 14 H74 L120 132 L166 14 H222 L146 186 H94 Z"
+                  fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linejoin="round"/>
+
+            <!-- banner across the middle -->
+            <path d="M10 84 C40 72 200 72 230 84 L230 128 C200 116 40 116 10 128 Z"
+                  fill="#0B0B0B" stroke="#0B0B0B" stroke-width="14" stroke-linejoin="round"/>
+            <path d="M10 84 C40 72 200 72 230 84 L230 128 C200 116 40 116 10 128 Z" fill="#FFFFFF"/>
+            <!-- textLength pins the word to the banner even if Bebas Neue fails to load -->
+            <text x="120" y="115" text-anchor="middle" textLength="150" lengthAdjust="spacingAndGlyphs"
+                  font-family="'Bebas Neue', Impact, 'Arial Narrow', sans-serif"
+                  font-size="46" letter-spacing="6" fill="#0B0B0B">ATOM</text>
+          </svg>
+        </h1>
         <div class="orb-wrap">
           <span class="ring ring-1"></span>
           <span class="ring ring-2"></span>
