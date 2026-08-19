@@ -73,47 +73,14 @@ body {
 .status {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: transparent;
   color: var(--muted);
   font-size: 12px;
-  transition: background 0.3s ease, color 0.3s ease;
-  backdrop-filter: blur(8px);
-}
-
-.status::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--muted);
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
 }
 
 .status.live {
-  background: rgba(200, 19, 36, 0.18);
   color: #ff8880;
-}
-
-.status.live::before {
-  background: #ff5a52;
-  opacity: 1;
-  transform: scale(1);
-  animation: dot-breathe 1.8s ease-in-out infinite;
-}
-
-@keyframes dot-breathe {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
 }
 
 .stage {
@@ -504,6 +471,31 @@ body {
   }
 }
 
+.end-btn {
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: #E8341F;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.18s ease, transform 0.1s ease;
+  box-shadow: 0 6px 18px rgba(232, 52, 31, 0.35);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.end-btn:hover { background: #F2492F; }
+.end-btn:active { transform: scale(0.94); }
+.end-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+.end-btn .icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
 .controls {
   display: flex;
   justify-content: center;
@@ -527,47 +519,10 @@ body {
   pointer-events: auto;
 }
 
-.ctrl-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: none;
-  background: transparent;
-  padding:5px 12px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
-.ctrl-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.ctrl-btn:active {
-  transform: scale(0.96);
-}
-
-.ctrl-btn.muted {
-  color: var(--muted);
-}
-
 .icon {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-}
-
-.end-btn {
-  color: var(--danger);
-}
-
-.end-btn .icon {
-  color: var(--danger);
 }
 
 /* Respect reduced-motion preferences */
