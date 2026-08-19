@@ -145,7 +145,7 @@ body {
    viewBox keeps the proportions, so no height is needed. */
 .vmark {
   display: block;
-  width: clamp(210px, 52vw, 340px);
+  width: clamp(180px, 42vw, 280px);
   height: auto;
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
 }
@@ -162,7 +162,7 @@ body {
     transform: none;
   }
   .vmark {
-    width: clamp(150px, 30vw, 220px);
+    width: clamp(140px, 26vw, 190px);
   }
   .stage {
     gap: 18px;
