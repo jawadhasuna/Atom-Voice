@@ -31,35 +31,18 @@
       <div class="stage">
         <h1 class="title">
           <span class="visually-hidden">Atom Voice</span>
-          <svg class="vmark" viewBox="0 0 280 170" role="img" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="atomGloss" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#ff6b60"/>
-                <stop offset="48%" stop-color="#e50914"/>
-                <stop offset="52%" stop-color="#b00710"/>
-                <stop offset="100%" stop-color="#ff4d42"/>
-              </linearGradient>
-            </defs>
-
-            <!-- V: black keyline, red fill, white inline -->
-            <path d="M20 12 H86 L140 108 L194 12 H260 L172 158 H108 Z"
-                  fill="#0B0B0B" stroke="#0B0B0B" stroke-width="14" stroke-linejoin="round"/>
-            <path d="M20 12 H86 L140 108 L194 12 H260 L172 158 H108 Z" fill="#E50914"/>
-            <path d="M20 12 H86 L140 108 L194 12 H260 L172 158 H108 Z"
-                  fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/>
-
-            <!-- Banner ends are slanted to sit flush with the V's outer edges;
-                 square ends overhung the V by ~70px on each side. -->
-            <path d="M50 62 C95 53 185 53 230 62 L203 107 C160 98 120 98 77 107 Z"
-                  fill="#0B0B0B" stroke="#0B0B0B" stroke-width="11" stroke-linejoin="round"/>
-            <path d="M50 62 C95 53 185 53 230 62 L203 107 C160 98 120 98 77 107 Z" fill="#14171B"/>
-
-            <!-- textLength pins the word inside the ribbon even if Anton fails
-                 to load and a fallback with different metrics is used. -->
-            <text x="140" y="95" text-anchor="middle" textLength="122" lengthAdjust="spacingAndGlyphs"
-                  font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="36"
-                  fill="url(#atomGloss)" stroke="#FFFFFF" stroke-width="2.5"
-                  paint-order="stroke">ATOM</text>
+          <svg class="vmark" viewBox="0 0 300 200" role="img" aria-hidden="true" focusable="false">
+            <!-- The V sits behind as an outline only, at half opacity, so it
+                 reads as a backdrop rather than a badge. No fill and no banner:
+                 the word carries the mark, the V just frames it. -->
+            <path d="M30 18 H92 L150 128 L208 18 H270 L182 176 H118 Z"
+                  fill="none" stroke="#E50914" stroke-width="5" stroke-opacity="0.5"
+                  stroke-linejoin="round"/>
+            <!-- textLength pins the word so a fallback face with different
+                 metrics cannot widen it past the V. -->
+            <text x="150" y="112" text-anchor="middle" textLength="150" lengthAdjust="spacingAndGlyphs"
+                  font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="56"
+                  fill="#FFFFFF">ATOM</text>
           </svg>
         </h1>
         <div class="orb-wrap">
