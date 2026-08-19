@@ -13,7 +13,6 @@ const orb = document.getElementById("orb");
 const hint = document.getElementById("hint");
 const statusEl = document.getElementById("status");
 const controls = document.getElementById("controls");
-const muteBtn = document.getElementById("muteBtn");
 const endBtn = document.getElementById("endBtn");
 const errorBanner = document.getElementById("errorBanner");
 const orbInner = document.querySelector(".orb-inner");
@@ -477,8 +476,6 @@ function endCall() {
   setOrbState("idle");
   setStatus("offline");
   hint.textContent = "Tap to Talk";
-  muteBtn.classList.remove("muted");
-  muteBtn.querySelector("span").textContent = "Mute";
   isMuted = false;
 }
 
@@ -488,9 +485,3 @@ orb.addEventListener("click", () => {
 });
 
 endBtn.addEventListener("click", endCall);
-
-muteBtn.addEventListener("click", () => {
-  isMuted = !isMuted;
-  muteBtn.classList.toggle("muted", isMuted);
-  muteBtn.querySelector("span").textContent = isMuted ? "Unmute" : "Mute";
-});

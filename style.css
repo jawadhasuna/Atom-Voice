@@ -98,7 +98,7 @@ body {
    pair of them centring together, which pushed the orb below the middle. */
 .title {
   position: absolute;
-  top: 34px;
+  top: 14px;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
@@ -119,15 +119,15 @@ body {
   height: auto;
   z-index: 0;
   pointer-events: none;
-  transform: translate(-50%, calc(-50% - 88px));
+  transform: translate(-50%, calc(-50% - 102px));
   animation: v-drift 7s ease-in-out infinite alternate;
 }
 
 /* Two transforms on one property would overwrite each other, so the centring
    translate lives in the keyframes alongside the drift. */
 @keyframes v-drift {
-  from { transform: translate(-50%, calc(-50% - 100px)); }
-  to   { transform: translate(-50%, calc(-50% - 76px)); }
+  from { transform: translate(-50%, calc(-50% - 114px)); }
+  to   { transform: translate(-50%, calc(-50% - 90px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -136,7 +136,7 @@ body {
 
 .vmark {
   display: block;
-  width: clamp(165px, 36vw, 246px);
+  width: clamp(190px, 42vw, 286px);
   height: auto;
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
 }
@@ -498,26 +498,24 @@ body {
 }
 
 .end-btn {
-  width: 56px;
-  height: 56px;
   border: none;
-  border-radius: 50%;
   background: transparent;
   display: grid;
   place-items: center;
   cursor: pointer;
-  padding: 0;
-  transition: background 0.18s ease, transform 0.1s ease;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: filter 0.18s ease, transform 0.1s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.end-btn:hover { background: rgba(249, 83, 79, 0.14); }
+.end-btn:hover { filter: brightness(1.25); }
 .end-btn:active { transform: scale(0.94); }
 .end-btn:focus-visible { outline: 2px solid #F9534F; outline-offset: 2px; }
 
 .end-btn .icon {
-  width: 38px;
-  height: 38px;
+  width: 74px;
+  height: auto;
   display: block;
 }
 
