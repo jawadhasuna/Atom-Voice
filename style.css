@@ -110,6 +110,30 @@ body {
 
 /* The wordmark is now artwork rather than type. Width drives the size; the
    viewBox keeps the proportions, so no height is needed. */
+/* Behind everything in the wrapper: orb is z-index 2, rings are 1. */
+.vfloat {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(230px, 56vw, 330px);
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: v-drift 7s ease-in-out infinite alternate;
+}
+
+/* Two transforms on one property would overwrite each other, so the centring
+   translate lives in the keyframes alongside the drift. */
+@keyframes v-drift {
+  from { transform: translate(-50%, calc(-50% - 14px)); }
+  to   { transform: translate(-50%, calc(-50% + 14px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vfloat { animation: none; }
+}
+
 .vmark {
   display: block;
   width: clamp(165px, 36vw, 246px);
@@ -146,6 +170,8 @@ body {
 
 .orb-wrap {
   position: relative;
+  /* the drifting V is allowed to spill past the wrapper */
+  overflow: visible;
   --size: clamp(120px, 30vw, 168px);
   width: clamp(140px, 34vw, 190px);
   height: clamp(140px, 34vw, 190px);

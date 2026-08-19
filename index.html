@@ -31,21 +31,21 @@
       <div class="stage">
         <h1 class="title">
           <span class="visually-hidden">Atom Voice</span>
-          <svg class="vmark" viewBox="0 0 300 200" role="img" aria-hidden="true" focusable="false">
-            <!-- The V sits behind as an outline only, at half opacity, so it
-                 reads as a backdrop rather than a badge. No fill and no banner:
-                 the word carries the mark, the V just frames it. -->
-            <path d="M30 18 H92 L150 128 L208 18 H270 L182 176 H118 Z"
-                  fill="none" stroke="#E50914" stroke-width="5" stroke-opacity="0.5"
-                  stroke-linejoin="round"/>
-            <!-- textLength pins the word so a fallback face with different
-                 metrics cannot widen it past the V. -->
-            <text x="150" y="112" text-anchor="middle" textLength="162" lengthAdjust="spacing"
+          <svg class="vmark" viewBox="0 0 300 90" role="img" aria-hidden="true" focusable="false">
+            <text x="150" y="66" text-anchor="middle" textLength="162" lengthAdjust="spacing"
                   font-family="'Anton', Impact, 'Arial Narrow', sans-serif" font-size="56"
                   fill="#FFFFFF">ATOM</text>
           </svg>
         </h1>
         <div class="orb-wrap">
+          <!-- Sits behind the orb and drifts, so the orb reads as passing in
+               front of it. Overflows the wrapper on purpose - the V is taller
+               than the orb and should rise above it. -->
+          <svg class="vfloat" viewBox="0 0 300 200" aria-hidden="true" focusable="false">
+            <path d="M30 18 H92 L150 128 L208 18 H270 L182 176 H118 Z"
+                  fill="none" stroke="#E50914" stroke-width="5" stroke-opacity="0.5"
+                  stroke-linejoin="round"/>
+          </svg>
           <span class="ring ring-1"></span>
           <span class="ring ring-2"></span>
           <span class="ring ring-3"></span>
