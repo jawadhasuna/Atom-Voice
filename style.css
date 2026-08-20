@@ -593,7 +593,7 @@ body {
 .end-btn {
   border: none;
   background: transparent;
-  /* The path is fill="currentColor". Half strength, which is what the V is
+  /* The handset is drawn from currentColor, at the half strength the V is
      stroked at, so the two reds land on the same colour over the ground. */
   color: var(--brand-red-half);
   display: grid;
@@ -613,6 +613,20 @@ body {
   width: 52px;
   height: auto;
   display: block;
+}
+
+/* Outlined rather than filled, to match the V. The supplied artwork is a
+   traced silhouette, so dropping the fill and stroking the same path draws
+   the handset's own outline and lets the ground through the middle.
+   non-scaling-stroke keeps the line an even 2px: the path carries a matrix
+   that scales x and y by different amounts, which would otherwise thin the
+   stroke on one axis and not the other. */
+.end-btn .icon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
 .controls {
