@@ -52,7 +52,13 @@
      follows can be a constant. */
   --size: clamp(120px, 30vw, 168px);        /* orb diameter */
   --v-width: clamp(200px, 46vw, 268px);     /* the drifting V */
-  --mark-width: clamp(190px, 42vw, 286px);  /* the wordmark's svg */
+  /* The wordmark's svg. All three numbers come down together on purpose:
+     below 452px of viewport the vw term loses to the floor, so on every phone
+     the mark is pinned to that lower bound and trimming only the maximum
+     changes nothing there. --mark-width is also the knob that actually
+     resizes the mark - font-size does not, because textLength pins the word's
+     advance width and only the cap height would move. */
+  --mark-width: clamp(178px, 39.5vw, 269px);
 
   /* The V's point sits 0.2533 x its width below its own centre: the path
      bottoms out at y=176 of a 200-tall viewBox rendered 2/3 as tall as it is
