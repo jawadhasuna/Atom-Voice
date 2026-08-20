@@ -1,9 +1,9 @@
-/* Bungee Inline, self-hosted rather than pulled from Google, so the
-   wordmark cannot render in a fallback face on a cold or blocked CDN.
+/* Michroma, self-hosted rather than pulled from Google, so the wordmark
+   cannot render in a fallback face on a cold or blocked CDN.
    SIL Open Font License 1.1 - the licence text ships in fonts/OFL.txt. */
 @font-face {
-  font-family: "Bungee Inline";
-  src: url("fonts/BungeeInline-Regular.woff2") format("woff2");
+  font-family: "Michroma";
+  src: url("fonts/Michroma-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   /* block, not swap: the mark is pinned with textLength, so a late swap
@@ -35,6 +35,10 @@
      touches the top of the circle, which is as high as the V can go while
      still meeting it. */
   --v-tuck: 0px;
+  /* Lowers the entire composition - wordmark, V and orb together. The V rides
+     inside .orb-wrap and the wordmark is offset by the same amount, so the
+     spacing between all three is untouched by this. */
+  --stack-drop: 14px;
 
   /* Blob palette — idle (high-contrast grayscale water drift) */
   --blob-base-a: #5a5a5a;
@@ -119,7 +123,7 @@ body {
    pair of them centring together, which pushed the orb below the middle. */
 .title {
   position: absolute;
-  top: 14px;
+  top: calc(14px + var(--stack-drop));
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
@@ -165,6 +169,18 @@ body {
   .vfloat { animation: none; }
 }
 
+/* The face and its size live here rather than as SVG presentation
+   attributes, so the whole sizing decision sits next to the layout it has to
+   satisfy. Michroma runs 4.417em for ATOM where Bungee Inline ran 2.972, so
+   the size drops from 56 to 40 and the slot opens from 196 to 210. That holds
+   the letter gap at 11.1 units (it was 10.7) and keeps the word inside the V
+   by 13px on desktop and 26px on a phone, which is where it has always sat.
+   At 56 it would have overhung the V by 36px instead. */
+.vmark text {
+  font-family: "Michroma", Impact, "Arial Narrow", sans-serif;
+  font-size: 40px;
+}
+
 .vmark {
   display: block;
   width: clamp(190px, 42vw, 286px);
@@ -197,6 +213,7 @@ body {
   :root {
     --orb-drop: 0px;
     --v-tuck: 50px;
+    --stack-drop: 0px;
   }
 }
 
@@ -213,8 +230,9 @@ body {
   /* the drifting V is allowed to spill past the wrapper */
   overflow: visible;
   /* Nudged below the stage centre. A transform moves it the full distance
-     and takes up no layout, so nothing else in the stage shifts with it. */
-  transform: translateY(var(--orb-drop));
+     and takes up no layout, so nothing else in the stage shifts with it.
+     The V is a child, so it comes along and keeps its gap to the orb. */
+  transform: translateY(calc(var(--orb-drop) + var(--stack-drop)));
   --size: clamp(120px, 30vw, 168px);
   width: clamp(140px, 34vw, 190px);
   height: clamp(140px, 34vw, 190px);
@@ -548,7 +566,7 @@ body {
   display: grid;
   place-items: center;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 12px 16px;
   border-radius: 12px;
   transition: filter 0.18s ease, transform 0.1s ease;
   -webkit-tap-highlight-color: transparent;
@@ -559,7 +577,7 @@ body {
 .end-btn:focus-visible { outline: 2px solid #F9534F; outline-offset: 2px; }
 
 .end-btn .icon {
-  width: 88px;
+  width: 64px;
   height: auto;
   display: block;
 }
