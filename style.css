@@ -45,6 +45,38 @@
      spacing between all three is untouched by this. */
   --stack-drop: 14px;
 
+  /* ---- Composition geometry --------------------------------------------
+     The three widths live here rather than on their own elements, so the
+     wordmark can be positioned from the V's measurements. All three are
+     vw-clamped and they cross over each other, which is why none of what
+     follows can be a constant. */
+  --size: clamp(120px, 30vw, 168px);        /* orb diameter */
+  --v-width: clamp(200px, 46vw, 268px);     /* the drifting V */
+  --mark-width: clamp(190px, 42vw, 286px);  /* the wordmark's svg */
+
+  /* The V's point sits 0.2533 x its width below its own centre: the path
+     bottoms out at y=176 of a 200-tall viewBox rendered 2/3 as tall as it is
+     wide. Lifting by that plus the orb's radius, less the drop the wrapper
+     already applied, lands the point exactly on top of the orb. */
+  --v-lift: calc(
+    0.2533 * var(--v-width) + var(--size) / 2 - var(--orb-drop) - var(--v-tuck)
+  );
+
+  /* How far the letters' cap line clears the V's top edge. Lower it to sink
+     the wordmark further into the V, negative to start it below the edge. */
+  --mark-rise: 8px;
+  /* The wordmark is measured off the V, from the same stage-centre anchor, so
+     the two hold their relation at every size. A fixed number could not: the
+     V's top edge sits 173px above the centre on a desktop and 133px on a
+     phone, being vw-clamped where the wordmark is clamped differently.
+       0.2733 x --v-width    = V's top edge, above its own centre
+       0.035  x --mark-width = the cap line, below the wordmark's own centre
+                               (font-size 42, Michroma's 0.75 cap ratio) */
+  --mark-lift: calc(
+    var(--v-lift) + 0.2733 * var(--v-width) - 0.035 * var(--mark-width)
+      + var(--mark-rise)
+  );
+
   /* Blob palette — idle (high-contrast grayscale water drift) */
   --blob-base-a: #5a5a5a;
   --blob-base-b: #050505;
@@ -125,12 +157,16 @@ body {
 }
 
 /* Lifted out of the flow so the orb centres on the stage rather than the
-   pair of them centring together, which pushed the orb below the middle. */
+   pair of them centring together, which pushed the orb below the middle.
+   z-index puts the wordmark above .orb-wrap: that wrapper is a stacking
+   context (it has a transform) and comes later in the document, so without
+   this the V paints over the letters instead of behind them. */
 .title {
   position: absolute;
-  top: calc(14px + var(--stack-drop));
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  z-index: 1;
+  transform: translate(-50%, calc(-50% + var(--stack-drop) - var(--mark-lift)));
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -145,16 +181,6 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  --v-width: clamp(200px, 46vw, 268px);
-  /* The V's point sits 0.2533 x its width below its own centre: the path
-     bottoms out at y=176 of a 200-tall viewBox that is rendered 2/3 as tall
-     as it is wide. Lifting by that plus the orb's radius, less the drop the
-     wrapper already applied, lands the point exactly on the top of the orb -
-     from which the drift below carries it down into the circle.
-     --size is the orb's diameter, inherited from .orb-wrap. */
-  --v-lift: calc(
-    0.2533 * var(--v-width) + var(--size) / 2 - var(--orb-drop) - var(--v-tuck)
-  );
   stroke: var(--brand-red);
   stroke-opacity: 0.5;
   width: var(--v-width);
@@ -190,7 +216,7 @@ body {
 
 .vmark {
   display: block;
-  width: clamp(190px, 42vw, 286px);
+  width: var(--mark-width);
   height: auto;
   filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.55));
 }
@@ -240,7 +266,6 @@ body {
      and takes up no layout, so nothing else in the stage shifts with it.
      The V is a child, so it comes along and keeps its gap to the orb. */
   transform: translateY(calc(var(--orb-drop) + var(--stack-drop)));
-  --size: clamp(120px, 30vw, 168px);
   width: clamp(140px, 34vw, 190px);
   height: clamp(140px, 34vw, 190px);
   display: flex;
@@ -638,8 +663,10 @@ body {
   }
 }
 @media (max-width: 480px) {
-  .orb-wrap {
+  :root {
     --size: clamp(160px, 42vw, 220px);
+  }
+  .orb-wrap {
     width: clamp(180px, 46vw, 240px);
     height: clamp(180px, 46vw, 240px);
   }
