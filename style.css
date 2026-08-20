@@ -1,3 +1,16 @@
+/* Bungee Inline, self-hosted rather than pulled from Google, so the
+   wordmark cannot render in a fallback face on a cold or blocked CDN.
+   SIL Open Font License 1.1 - the licence text ships in fonts/OFL.txt. */
+@font-face {
+  font-family: "Bungee Inline";
+  src: url("fonts/BungeeInline-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  /* block, not swap: the mark is pinned with textLength, so a late swap
+     would visibly re-space the letters. Better to hold the paint. */
+  font-display: block;
+}
+
 :root {
   --bg: #060606;
   --ink: #f5f5f5;
@@ -12,8 +25,16 @@
   --ring-talking: rgba(200, 19, 36, 0.45);
   --pill-bg: #17171799;
   --danger: #ff5a52;
-  --radius-lg: 28px;
   --level: 0; /* live audio volume 0-1, set from JS */
+
+  /* How far the orb sits below the stage centre. The stage is bounded by the
+     topbar and the controls row, so its centre is ~38px above the middle of
+     the viewport; this puts the orb on the actual centre of the screen. */
+  --orb-drop: 38px;
+  /* How far the V's point is allowed to sink into the orb. Zero means it just
+     touches the top of the circle, which is as high as the V can go while
+     still meeting it. */
+  --v-tuck: 0px;
 
   /* Blob palette — idle (high-contrast grayscale water drift) */
   --blob-base-a: #5a5a5a;
@@ -115,19 +136,29 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(200px, 46vw, 268px);
+  --v-width: clamp(200px, 46vw, 268px);
+  /* The V's point sits 0.2533 x its width below its own centre: the path
+     bottoms out at y=176 of a 200-tall viewBox that is rendered 2/3 as tall
+     as it is wide. Lifting by that plus the orb's radius, less the drop the
+     wrapper already applied, lands the point exactly on the top of the orb -
+     from which the drift below carries it down into the circle.
+     --size is the orb's diameter, inherited from .orb-wrap. */
+  --v-lift: calc(
+    0.2533 * var(--v-width) + var(--size) / 2 - var(--orb-drop) - var(--v-tuck)
+  );
+  width: var(--v-width);
   height: auto;
   z-index: 0;
   pointer-events: none;
-  transform: translate(-50%, calc(-50% - 102px));
+  transform: translate(-50%, calc(-50% - var(--orb-drop) - var(--v-lift)));
   animation: v-drift 7s ease-in-out infinite alternate;
 }
 
 /* Two transforms on one property would overwrite each other, so the centring
    translate lives in the keyframes alongside the drift. */
 @keyframes v-drift {
-  from { transform: translate(-50%, calc(-50% - 114px)); }
-  to   { transform: translate(-50%, calc(-50% - 90px)); }
+  from { transform: translate(-50%, calc(-50% - var(--orb-drop) - var(--v-lift))); }
+  to   { transform: translate(-50%, calc(-50% - var(--orb-drop) - var(--v-lift) + 24px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -158,6 +189,15 @@ body {
   .stage {
     gap: 18px;
   }
+  /* Landscape phones stack the title instead of centring on it, so there is
+     no spare height left to push the orb down into. Nor is there room above
+     for the V at full lift - measured at 760x380, it loses 35px off the top
+     of the screen. Sinking the point 50px into the orb pulls it back into
+     view, which is where this layout had it before the orb moved at all. */
+  :root {
+    --orb-drop: 0px;
+    --v-tuck: 50px;
+  }
 }
 
 .visually-hidden {
@@ -172,6 +212,9 @@ body {
   position: relative;
   /* the drifting V is allowed to spill past the wrapper */
   overflow: visible;
+  /* Nudged below the stage centre. A transform moves it the full distance
+     and takes up no layout, so nothing else in the stage shifts with it. */
+  transform: translateY(var(--orb-drop));
   --size: clamp(120px, 30vw, 168px);
   width: clamp(140px, 34vw, 190px);
   height: clamp(140px, 34vw, 190px);
@@ -500,6 +543,8 @@ body {
 .end-btn {
   border: none;
   background: transparent;
+  /* The path is fill="currentColor"; this is the only place the red is set. */
+  color: #e50914;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -514,7 +559,7 @@ body {
 .end-btn:focus-visible { outline: 2px solid #F9534F; outline-offset: 2px; }
 
 .end-btn .icon {
-  width: 74px;
+  width: 88px;
   height: auto;
   display: block;
 }
@@ -525,15 +570,12 @@ body {
   gap: 12px;
   padding: 14px;
   background: transparent;
-  backdrop-filter: blur(10px);
-  border-radius: var(--radius-lg);
   align-self: center;
   margin-bottom: 12px;
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
   transition: opacity 0.35s ease, transform 0.35s ease;
-  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .controls.visible {
